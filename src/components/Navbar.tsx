@@ -25,7 +25,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold tracking-tight">
-          Victor<span className="text-blue-600">Dev</span>
+          Victor<span className="text-blue-600">Eze</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -34,20 +34,21 @@ export default function Navbar() {
             const isActive = pathname === link.href;
             return (
               <Link
-                key={link.name}
-                href={link.href}
-                className={`relative pb-1 transition-colors ${
-                  isActive ? "text-blue-600" : "text-gray-800 dark:text-gray-200"
-                }`}
-              >
-                {link.name}
-                {/* underline effect */}
-                <span
-                  className={`absolute left-0 -bottom-0.5 h-[2px] w-0 bg-blue-600 transition-all duration-300 ${
-                    isActive ? "w-full" : "group-hover:w-full"
-                  }`}
-                />
-              </Link>
+  key={link.name}
+  href={link.href}
+  className={`relative pb-1 transition-colors ${
+    isActive ? "text-blue-600" : "text-gray-800 dark:text-gray-200"
+  }`}
+>
+  {link.name}
+  {/* underline effect */}
+  <span
+    className={`absolute left-0 -bottom-0.5 h-[2px] w-0 bg-blue-600 transition-all duration-300 ${
+      isActive ? "w-full" : "group-hover:w-full"
+    }`}
+  />
+</Link>
+
             );
           })}
 
