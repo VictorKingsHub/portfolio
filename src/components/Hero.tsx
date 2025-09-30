@@ -9,13 +9,12 @@ export default function Hero() {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // Ensure theme is mounted before rendering (prevents hydration mismatch)
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
   return (
     <motion.section
-      key={theme} // triggers re-animation on theme switch
+      key={theme}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -24,7 +23,11 @@ export default function Hero() {
                  bg-white dark:bg-gray-900 
                  transition-colors duration-500"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 items-center">
+      <div
+        className="max-w-7xl mx-auto px-6 lg:px-12 
+                   grid grid-cols-1 lg:grid-cols-2 gap-12 items-center
+                   flex-col-reverse"
+      >
         {/* Left Text Section */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -98,21 +101,34 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Right Image Section */}
+        {/* Right Image Section with Floating Animation */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.9, duration: 0.8 }}
-          className="flex justify-center lg:justify-end"
+          className="flex justify-center lg:justify-end order-first lg:order-none"
         >
-          <Image
-            src={theme === "dark" ? "/me.png" : "/merev.png"}
-            alt="Victor - Frontend Developer"
-            width={300}
-            height={300}
-            className="w-full max-w-sm rounded-full shadow-lg p-2 border-4 border-blue-600 
-                       transition-transform duration-500"
-          />
+          <motion.div
+            animate={{
+              y: [0, -15, 0],
+              rotate: [0, 2, -2, 0],
+              scale: [1, 1.02, 1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <Image
+              src={theme === "dark" ? "/me.png" : "/merev.png"}
+              alt="Victor - Frontend Developer"
+              width={300}
+              height={300}
+              className="w-full max-w-sm rounded-full shadow-lg p-2 border-4 border-blue-600 
+                         transition-transform duration-500"
+            />
+          </motion.div>
         </motion.div>
       </div>
     </motion.section>
