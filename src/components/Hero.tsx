@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FaArrowRight } from "react-icons/fa";
+import { FaArrowRight, FaDownload } from "react-icons/fa";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
@@ -14,7 +14,7 @@ export default function Hero() {
 
   return (
     <motion.section
-    id="home"
+      id="home"
       key={theme}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -26,7 +26,6 @@ export default function Hero() {
                  transition-colors duration-500"
     >
       <div
-      
         className="max-w-7xl mx-auto px-6 lg:px-12 
                    flex flex-col-reverse lg:grid lg:grid-cols-2 
                    gap-12 items-center"
@@ -101,10 +100,21 @@ export default function Hero() {
             >
               Contact Me
             </motion.a>
+            {/* Download CV Button */}
+            <motion.a
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+              whileHover={{ scale: 1.05 }}
+              href="/Victor-Eze-CV.pdf"
+              download
+              className="px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-blue-600 
+                         text-white font-medium flex items-center gap-2 shadow-md hover:shadow-lg transition"
+            >
+              Download CV <FaDownload />
+            </motion.a>
           </motion.div>
         </motion.div>
 
-        {/* Right Image Section with Live Animation */}
+        {/* Right Image Section */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}

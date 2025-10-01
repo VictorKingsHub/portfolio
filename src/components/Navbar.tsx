@@ -6,10 +6,10 @@ import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "next-themes";
 
 const navLinks = [
-  { name: "Home", href: "home" },
-  { name: "About", href: "about" },
-  { name: "Projects", href: "projects" },
-  { name: "Contact", href: "contact" },
+  { name: "Home", href: "Welcome" },
+  { name: "About", href: "About" },
+  { name: "Projects", href: "Projects" },
+  { name: "Contact", href: "Contact" },
 ];
 
 export default function Navbar() {

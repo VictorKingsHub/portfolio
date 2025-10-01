@@ -43,7 +43,7 @@ export default function Footer() {
             <FaLinkedin />
           </a>
           <a
-            href="mailto:ezevictornkemjika@gmail.com?subject=Project%20Inquiry&body=Hi%20Victor%2C%0A%0AI%20would%20like%20to%20discuss%20a%20potential%20project%20with%20you.%20Please%20get%20back%20to%20me.%0A%0ARegards%2C"
+            href="mailto:ezevictornkemjika@gmail.com"
             className="hover:text-blue-600 transition-colors"
           >
             <SiGmail />
