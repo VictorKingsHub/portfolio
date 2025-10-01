@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "next-themes";
@@ -15,8 +15,30 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const [activeSection, setActiveSection] = useState("home");
 
-  // Smooth scroll function
+  // IntersectionObserver for active section detection
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    navLinks.forEach((link) => {
+      const section = document.getElementById(link.href);
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Smooth scroll
   const scrollToSection = (id: string) => {
     const section = document.getElementById(id);
     if (section) {
@@ -37,16 +59,31 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex space-x-8 items-center">
-          {navLinks.map((link) => (
-            <button
-              key={link.name}
-              onClick={() => scrollToSection(link.href)}
-              className="group relative pb-1 text-gray-800 dark:text-gray-200 transition-colors hover:text-blue-600"
-            >
-              {link.name}
-              <span className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-            </button>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href;
+            return (
+              <button
+                key={link.name}
+                onClick={() => scrollToSection(link.href)}
+                className={`relative pb-1 transition-colors ${
+                  isActive
+                    ? "text-blue-600"
+                    : "text-gray-800 dark:text-gray-200 hover:text-blue-600"
+                }`}
+              >
+                {link.name}
+
+                {/* Animated underline */}
+                {isActive && (
+                  <motion.span
+                    layoutId="underline"
+                    className="absolute left-0 -bottom-0.5 h-[2px] w-full bg-blue-600"
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+              </button>
+            );
+          })}
 
           {/* Theme Toggle */}
           <button
@@ -79,18 +116,33 @@ export default function Navbar() {
             className="md:hidden bg-white dark:bg-black border-t border-gray-200 dark:border-gray-800"
           >
             <div className="px-4 pt-4 pb-6 space-y-4">
-              {navLinks.map((link) => (
-                <button
-                  key={link.name}
-                  onClick={() => {
-                    scrollToSection(link.href);
-                    setIsOpen(false);
-                  }}
-                  className="block text-lg text-gray-800 dark:text-gray-200 hover:text-blue-600 transition"
-                >
-                  {link.name}
-                </button>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href;
+                return (
+                  <button
+                    key={link.name}
+                    onClick={() => {
+                      scrollToSection(link.href);
+                      setIsOpen(false);
+                    }}
+                    className={`relative block text-lg pb-1 ${
+                      isActive
+                        ? "text-blue-600"
+                        : "text-gray-800 dark:text-gray-200 hover:text-blue-600"
+                    }`}
+                  >
+                    {link.name}
+
+                    {isActive && (
+                      <motion.span
+                        layoutId="mobile-underline"
+                        className="absolute left-0 -bottom-0.5 h-[2px] w-full bg-blue-600"
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
 
               {/* Theme Toggle */}
               <button
