@@ -14,19 +14,22 @@ export default function Hero() {
 
   return (
     <motion.section
+    id="home"
       key={theme}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6 }}
-      className="h-screen flex items-center pt-16 
+      className="min-h-screen flex items-center 
+                 pt-24 sm:pt-20 lg:pt-16 
                  bg-white dark:bg-gray-900 
                  transition-colors duration-500"
     >
       <div
+      
         className="max-w-7xl mx-auto px-6 lg:px-12 
-                   grid grid-cols-1 lg:grid-cols-2 gap-12 items-center
-                   flex-col-reverse"
+                   flex flex-col-reverse lg:grid lg:grid-cols-2 
+                   gap-12 items-center"
       >
         {/* Left Text Section */}
         <motion.div
@@ -41,7 +44,7 @@ export default function Hero() {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-blue-600 font-medium text-lg"
           >
-            👋 Hi, I&apos;m Victor
+            Hi, I&apos;m Victor
           </motion.p>
 
           <motion.h1
@@ -101,12 +104,12 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Right Image Section with Floating Animation */}
+        {/* Right Image Section with Live Animation */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.9, duration: 0.8 }}
-          className="flex justify-center lg:justify-end order-first lg:order-none"
+          className="flex justify-center lg:justify-end"
         >
           <motion.div
             animate={{
@@ -121,7 +124,7 @@ export default function Hero() {
             }}
           >
             <Image
-              src={theme === "dark" ? "/me.png" : "/merev.png"}
+              src={theme === "dark" ? "/me.png" : "/reverse.png"}
               alt="Victor - Frontend Developer"
               width={300}
               height={300}
