@@ -1,53 +1,51 @@
-// src/components/Navbar.tsx
 "use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "next-themes";
-import { Link as ScrollLink } from "react-scroll";
 
 const navLinks = [
-  { name: "Home", to: "home" },
-  { name: "About", to: "about" },
-  { name: "Projects", to: "projects" },
-  { name: "Contact", to: "contact" },
+  { name: "Home", href: "home" },
+  { name: "About", href: "about" },
+  { name: "Projects", href: "projects" },
+  { name: "Contact", href: "contact" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
 
+  // Smooth scroll function
+  const scrollToSection = (id: string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-black/70 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
-        <ScrollLink
-          to="home"
-          smooth={true}
-          duration={700}
-          offset={-70}
-          className="text-xl font-bold tracking-tight cursor-pointer"
+        <button
+          onClick={() => scrollToSection("home")}
+          className="text-xl font-bold tracking-tight"
         >
           Victor<span className="text-blue-600">Eze</span>
-        </ScrollLink>
+        </button>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex space-x-8 items-center">
           {navLinks.map((link) => (
-            <ScrollLink
+            <button
               key={link.name}
-              to={link.to}
-              smooth={true}
-              duration={700}
-              offset={-70}
-              spy={true}
-              activeClass="!text-blue-600" // 👈 Force active state
-              className="group relative pb-1 cursor-pointer text-gray-800 dark:text-gray-200 hover:text-blue-600 transition-colors"
+              onClick={() => scrollToSection(link.href)}
+              className="group relative pb-1 text-gray-800 dark:text-gray-200 transition-colors hover:text-blue-600"
             >
               {link.name}
               <span className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-            </ScrollLink>
+            </button>
           ))}
 
           {/* Theme Toggle */}
@@ -82,19 +80,16 @@ export default function Navbar() {
           >
             <div className="px-4 pt-4 pb-6 space-y-4">
               {navLinks.map((link) => (
-                <ScrollLink
+                <button
                   key={link.name}
-                  to={link.to}
-                  smooth={true}
-                  duration={700}
-                  offset={-70}
-                  spy={true}
-                  activeClass="!text-blue-600"
-                  onClick={() => setIsOpen(false)}
-                  className="block text-lg pb-1 cursor-pointer text-gray-800 dark:text-gray-200 hover:text-blue-600 transition-colors"
+                  onClick={() => {
+                    scrollToSection(link.href);
+                    setIsOpen(false);
+                  }}
+                  className="block text-lg text-gray-800 dark:text-gray-200 hover:text-blue-600 transition"
                 >
                   {link.name}
-                </ScrollLink>
+                </button>
               ))}
 
               {/* Theme Toggle */}
