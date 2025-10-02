@@ -6,10 +6,10 @@ import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "next-themes";
 
 const navLinks = [
-  { name: "Home", href: "Welcome" },
-  { name: "About", href: "About" },
-  { name: "Projects", href: "Projects" },
-  { name: "Contact", href: "Contact" },
+  { name: "Home", href: "home" },
+  { name: "About", href: "about" },
+  { name: "Projects", href: "projects" },
+  { name: "Contact", href: "contact" },
 ];
 
 export default function Navbar() {
@@ -65,10 +65,10 @@ export default function Navbar() {
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className={`relative pb-1 transition-colors ${
+                className={`relative pb-1 transition-colors cursor-pointer hover:text-yellow-500${
                   isActive
                     ? "text-blue-600"
-                    : "text-gray-800 dark:text-gray-200 hover:text-blue-600"
+                    : "text-gray-800 dark:text-gray-200 "
                 }`}
               >
                 {link.name}
@@ -125,10 +125,10 @@ export default function Navbar() {
                       scrollToSection(link.href);
                       setIsOpen(false);
                     }}
-                    className={`relative block text-lg pb-1 ${
+                    className={`relative block text-lg pb-1 cursor-pointer hover:text-yellow-500${
                       isActive
                         ? "text-blue-600"
-                        : "text-gray-800 dark:text-gray-200 hover:text-blue-600"
+                        : "text-gray-800 dark:text-gray-200 "
                     }`}
                   >
                     {link.name}
@@ -150,7 +150,7 @@ export default function Navbar() {
                   setTheme(theme === "dark" ? "light" : "dark");
                   setIsOpen(false);
                 }}
-                className="flex items-center gap-2 text-lg hover:text-blue-600 transition-colors"
+                className="flex items-center gap-2 text-lg hover:text-white transition-colors"
               >
                 {theme === "dark" ? (
                   <>

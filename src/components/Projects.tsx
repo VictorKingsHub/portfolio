@@ -23,7 +23,7 @@ const projects = [
   {
     title: "AI Chatbot",
     description: "A conversational AI assistant powered by OpenAI and Next.js API routes.",
-    image: "/projects/chatbot.png",
+    image: "/consults.png",
     demoLink: "https://your-chatbot-link.com",
     codeLink: "https://github.com/your-repo",
   },
