@@ -14,7 +14,7 @@ export default function Hero() {
 
   return (
     <motion.section
-      id="home"
+      id="welcome"
       key={theme}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -95,7 +95,7 @@ export default function Hero() {
               whileHover={{ scale: 1.05 }}
               href="#contact"
               className="px-6 py-3 rounded-2xl border border-gray-300 dark:border-gray-600 
-                         text-gray-700 dark:text-gray-200 font-medium 
+                         text-gray-700 dark:text-gray-200 font-sm 
                          hover:border-blue-600 hover:text-blue-600 transition"
             >
               Contact Me

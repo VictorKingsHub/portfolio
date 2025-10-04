@@ -6,7 +6,7 @@ import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "next-themes";
 
 const navLinks = [
-  { name: "Home", href: "home" },
+  { name: "Welcome", href: "welcome" },
   { name: "About", href: "about" },
   { name: "Projects", href: "projects" },
   { name: "Contact", href: "contact" },
@@ -15,7 +15,7 @@ const navLinks = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState("welcome");
 
   // IntersectionObserver for active section detection
   useEffect(() => {
@@ -51,7 +51,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
         {/* Logo */}
         <button
-          onClick={() => scrollToSection("home")}
+          onClick={() => scrollToSection("welcome")}
           className="text-xl font-bold tracking-tight"
         >
           Victor<span className="text-blue-600">Eze</span>
